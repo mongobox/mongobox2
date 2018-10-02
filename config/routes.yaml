@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    defaults: { _controller: 'App\Controller\DefaultController::indexAction' }
+
+# first, run composer req annotations
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+
