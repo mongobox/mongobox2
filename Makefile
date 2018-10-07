@@ -1,11 +1,14 @@
+SITE_NAME=mongobox
+#FIG=docker-compose --file /home/agiry/working-directory/dimipro/docker-compose.yml
+
 FIG=docker-compose
-RUN_WEB=$(FIG) run --rm web-php7
+RUN_WEB=$(FIG) run --rm web
 
 EXEC_WEB=$(FIG) exec web
 EXEC_NODEJS=$(FIG) exec nodejs
 EXEC_MYSQL=$(FIG) exec mysql
 
-SITE_PATH=/var/www/mongobox
+SITE_PATH="/var/www/$(SITE_NAME)"
 
 CONSOLE_SITE="$(SITE_PATH)/bin/console"
 
@@ -64,7 +67,8 @@ sf-list:
 sf-cc:              ## Clear the cache in dev env
 sf-cc:
 	$(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && php -d memory_limit=-1 bin/console cache:clear --no-warmup"
-    $(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && php -d memory_limit=-1 bin/console cache:warmup"
+	$(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && php -d memory_limit=-1 bin/console cache:warmup"
+	$(EXEC_WEB) /bin/bash -c "cd $(SITE_PATH) && chmod -R 777 var/cache"
 
 sf-db-migrate:      ## doctrine:migrations:migrate
 sf-db-migrate:
@@ -105,6 +109,13 @@ assets-compile-prod:
 ##
 ## Database
 ##---------------------------------------------------------------------------
+db-dev-init:            ## Init Database and import data fixtures for dev
+db-dev-init:
+	-$(EXEC_WEB) $(CONSOLE_SITE) doctrine:database:drop --force --env=dev --connection=default 
+	-$(EXEC_WEB) $(CONSOLE_SITE) doctrine:database:create --env=dev --connection=default 
+	-$(EXEC_WEB) php -d memory_limit=-1 $(CONSOLE_SITE) doctrine:schema:update --force --env=dev --em=default 
+	-$(EXEC_WEB) $(CONSOLE_SITE) doctrine:fixtures:load --env=dev --append -n 
+
 db-dev-update:      ## Import dump (gzip file) on dev database. Ex : make db-dev-update DUMP_FILE=dump_mongobox_20171208.sql.gz
 db-dev-update:
 	-@echo DROP DATABASE "$(SITE_DEV_DB_NAME)" on DEV

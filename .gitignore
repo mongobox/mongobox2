@@ -18,3 +18,7 @@
 /docker-env
 /docker-compose.yml
 ###< docker ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###

@@ -27,3 +27,20 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
+
+    ## Google
+    App\Videos\Youtube\YoutubeProvider:
+        arguments:
+            - '@logger'
+            - '%env(GOOGLE_APP_NAME)%'
+            - '%env(GOOGLE_DEVELOPER_KEY)%'
+        tags:
+            - { name: monolog.logger, channel: videos }
+
+
+    App\Videos\Youtube\ImportFromYoutube:
+        autowire: true
+        autoconfigure: true
+        public: false
+        tags:
+            - { name: monolog.logger, channel: videos }

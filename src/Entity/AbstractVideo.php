@@ -40,10 +40,24 @@ abstract class AbstractVideo
     protected $providerId;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $sourceName;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     protected $duration;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $lastUpdatedDate;
+
+    /**
+     * @ORM\Column(type="boolean", options={"default": false})
+     */
+    protected $foundOnProvider = false;
 
     public function getId(): ?int
     {
@@ -55,7 +69,7 @@ abstract class AbstractVideo
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(?string $name): self
     {
         $this->name = $name;
 
@@ -85,9 +99,66 @@ abstract class AbstractVideo
         return $this->duration;
     }
 
-    public function setDuration(int $duration): self
+    public function setDuration(?int $duration): self
     {
         $this->duration = $duration;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSourceName(): ?string
+    {
+        return $this->sourceName;
+    }
+
+    /**
+     * @param mixed $sourceName
+     * @return AbstractVideo
+     */
+    public function setSourceName(string $sourceName)
+    {
+        $this->sourceName = $sourceName;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastUpdatedDate(): ?\DateTime
+    {
+        return $this->lastUpdatedDate;
+    }
+
+    /**
+     * @param mixed $lastUpdatedDate
+     * @return AbstractVideo
+     */
+    public function setLastUpdatedDate(\DateTime $lastUpdatedDate): self
+    {
+        $this->lastUpdatedDate = $lastUpdatedDate;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function isFoundOnProvider(): bool
+    {
+        return $this->foundOnProvider;
+    }
+
+    /**
+     * @param mixed $foundOnProvider
+     * @return AbstractVideo
+     */
+    public function setFoundOnProvider(bool $foundOnProvider): self
+    {
+        $this->foundOnProvider = $foundOnProvider;
+
         return $this;
     }
 }

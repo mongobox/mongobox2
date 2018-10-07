@@ -21,7 +21,7 @@ class DailymotionVideoRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Video[] Returns an array of Video objects
+//     * @return AbstractVideo[] Returns an array of AbstractVideo objects
 //     */
     /*
     public function findByExampleField($value)
@@ -38,7 +38,7 @@ class DailymotionVideoRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Video
+    public function findOneBySomeField($value): ?AbstractVideo
     {
         return $this->createQueryBuilder('v')
             ->andWhere('v.exampleField = :val')

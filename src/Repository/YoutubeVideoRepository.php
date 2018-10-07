@@ -19,32 +19,12 @@ class YoutubeVideoRepository extends ServiceEntityRepository
         parent::__construct($registry, YoutubeVideo::class);
     }
 
-//    /**
-//     * @return Video[] Returns an array of Video objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function findAllWithPagination(int $start = 0, $nbMaxParPage = 50)
     {
         return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('v.id', 'ASC')
-            ->setMaxResults(10)
             ->getQuery()
-            ->getResult()
-        ;
+            ->setFirstResult($start)
+            ->setMaxResults($nbMaxParPage)
+            ->getResult();
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Video
-    {
-        return $this->createQueryBuilder('v')
-            ->andWhere('v.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
