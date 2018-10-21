@@ -1,5 +1,5 @@
-SITE_NAME=mongobox
-#FIG=docker-compose --file /home/agiry/working-directory/dimipro/docker-compose.yml
+SITE_NAME=mongobox2
+#FIG=docker-compose --file ~/workspace/mongobox-sf4/docker-compose.yml
 
 FIG=docker-compose
 RUN_WEB=$(FIG) run --rm web
@@ -44,7 +44,7 @@ apache-restart:
 ##
 ## Shell for each docker container
 ##---------------------------------------------------------------------------
-web-shell:            ## Shell of  php 7.1
+web-shell:            ## Shell of  php 7.2
 web-shell:
 	-$(EXEC_WEB) /bin/bash
 
@@ -93,7 +93,7 @@ yarn-install:        ## Install node_modules
 yarn-install:
 	$(EXEC_NODEJS) /bin/bash -c "cd $(SITE_PATH) && yarn install"
 
-assets-compile-dev:         ## Compile assets for dev. Ex: make assets-compile-dev [CONFIG_NAME=dimipro|pulsat]
+assets-compile-dev:         ## Compile assets for dev. Ex: make assets-compile-dev
 assets-compile-dev:
 	$(EXEC_NODEJS) /bin/bash -c "cd $(SITE_PATH) && yarn run encore dev"
 
