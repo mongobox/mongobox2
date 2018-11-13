@@ -1,4 +1,3 @@
-
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
@@ -18,11 +17,6 @@
 ###> symfony/webpack-encore-pack ###
 /node_modules/
 ###< symfony/webpack-encore-pack ###
-
-###> symfony/web-server-bundle ###
-/.web-server-pid
-###< symfony/web-server-bundle ###
-
 ###> docker ###
 /docker-env
 /docker-compose.yml
@@ -31,3 +25,8 @@
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit
+/phpunit.xml
+###< symfony/phpunit-bridge ###
