@@ -2,7 +2,16 @@
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/
-/var/
+/var/*
+!/var/cache
+/var/cache/*
+!var/cache/.gitkeep
+!/var/log
+/var/log/*
+!var/log/.gitkeep
+!/var/sessions
+/var/sessions/*
+!var/sessions/.gitkeep
 /vendor/
 ###< symfony/framework-bundle ###
 
